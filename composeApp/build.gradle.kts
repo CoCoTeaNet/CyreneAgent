@@ -24,7 +24,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.decompose)
             implementation(libs.decompose.extensions.compose)
-//            implementation(libs.essenty.lifecycle)
+            implementation(libs.agentsflex)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
