@@ -25,6 +25,8 @@ kotlin {
             implementation(libs.decompose)
             implementation(libs.decompose.extensions.compose)
             implementation(libs.agentsflex)
+            implementation(libs.logback)
+            implementation(libs.hutool.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

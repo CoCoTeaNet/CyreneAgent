@@ -1,6 +1,14 @@
 package net.cocotea.cyreneagent.store
 
+import net.cocotea.cyreneagent.enums.Role
+
 data class AppState(
-    val chatMessageList: List<String> = emptyList(),
+    val chatMessageList: List<Message> = emptyList(),
     val isLoading: Boolean = false
+)
+
+data class Message (
+    val id: Long,
+    val role: Role,
+    var content: String = ""
 )

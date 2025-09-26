@@ -6,11 +6,11 @@ import net.cocotea.cyreneagent.navigation.Component
 
 class ChatComponent(
     private val componentContext: ComponentContext,
-) : Component, ComponentContext by componentContext{
+) : Component, ComponentContext by componentContext {
+
     @Composable
     override fun render() {
-        ChatView(
-
-        )
+        ChatView()
     }
+
 }
