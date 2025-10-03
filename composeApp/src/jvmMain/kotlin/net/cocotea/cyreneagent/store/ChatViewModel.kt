@@ -3,6 +3,9 @@ package net.cocotea.cyreneagent.store
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cn.hutool.core.util.IdUtil
+import com.agentsflex.core.memory.DefaultChatMemory
+import com.agentsflex.core.message.HumanMessage
+import com.agentsflex.core.prompt.HistoriesPrompt
 import com.agentsflex.llm.ollama.OllamaLlm
 import com.agentsflex.llm.ollama.OllamaLlmConfig
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,17 +13,29 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import net.cocotea.cyreneagent.memory.DatabaseChatMemory
 import net.cocotea.cyreneagent.enums.Role
 
+/**
+ * 对话业务模型，用于处理消息
+ *
+ * @author CoCoTea
+ */
 class ChatViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(AppState())
     val uiState: StateFlow<AppState> = _uiState.asStateFlow()
     val llm: OllamaLlm = initChat()
+    val defaultChatMemory = DefaultChatMemory()
 
     fun chat(prompt: String) {
+        // 消息与UI数据双向绑定渲染
         addMessage(prompt, Role.PLAYER)
+        // 历史对话
+        val historiesPrompt = HistoriesPrompt(defaultChatMemory)
+        historiesPrompt.addMessage(HumanMessage(prompt))
+        // 消息ID
         var msgId: Long? = null
-        llm.chatStream(prompt) { _, response ->
+        llm.chatStream(historiesPrompt) { _, response ->
             run {
                 if (msgId == null) {
                     msgId = addMessage("", Role.MODEL)

@@ -5,7 +5,13 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.androidx.room)
     kotlin("plugin.serialization") version "2.2.10"
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 kotlin {
@@ -27,6 +33,8 @@ kotlin {
             implementation(libs.agentsflex)
             implementation(libs.logback)
             implementation(libs.hutool.core)
+            implementation(libs.androidx.sqlite.bundled)
+            implementation(libs.androidx.room.runtime)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

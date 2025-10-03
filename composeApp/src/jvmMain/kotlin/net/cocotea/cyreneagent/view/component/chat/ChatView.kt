@@ -46,12 +46,12 @@ fun ChatView() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
-            Text(
-                text = "Body content",
-            )
+        Row(modifier = Modifier.fillMaxWidth().weight(0.5f)) {
+            Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.Center) {
+                Text(text = "Power by kotlin multiplatform")
+            }
         }
-        Row(modifier = Modifier.fillMaxWidth().weight(7f)) {
+        Row(modifier = Modifier.fillMaxWidth().weight(7.5f)) {
             ChatScreen()
         }
         Row(modifier = Modifier.fillMaxWidth().weight(2f)) {
